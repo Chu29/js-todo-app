@@ -18,6 +18,49 @@ const showErrorMessage = (message) => {
   }, 3000)
 }
 
+const renderPagination = () => {}
+
+const editTask = (index, li, taskText) => {
+  const input = document.createElement('input')
+  input.type = 'text'
+  input.value = todos[index]
+  input.className = 'todo-text'
+
+  // create save btn
+  const saveBtn = document.createElement('button')
+  const deleteBtn = document.createElement('button')
+  saveBtn.className = 'save-btn'
+  saveBtn.textContent = 'save'
+  deleteBtn.className = 'delete-btn'
+  deleteBtn.textContent = 'delete'
+
+  // replace the task text and edit with the current input
+
+  li.innerHTML = ''
+  li.appendChild(input)
+  li.appendChild(saveBtn)
+  li.appendChild(deleteBtn)
+
+  saveBtn.addEventListener('click', () => {
+    const updatedTask = input.value.trim()
+    if (updatedTask !== '') {
+      todos[index] = updatedTask
+      todoRender()
+    } else {
+      showErrorMessage('Task cannot be empty.')
+    }
+  })
+}
+
+const deleteTask = (index) => {
+  if ((currentPage - 1) * itemsPerPage >= todos.length) {
+    currentPage = Math.max(currentPage - 1, 1)
+  }
+  todos.splice(index, 1)
+  todoRender()
+  renderPagination()
+}
+
 const todoRender = () => {
   todoList.innerHTML = ''
 
