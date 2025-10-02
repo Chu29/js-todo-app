@@ -7,7 +7,7 @@
     <title>TODO:APP</title>
   </head>
   <body>
-    <div class="container">
+    <div id="my-div" class="header">
       <h1>TODO APP</h1>
       <div id="error-message" class="error-message"></div>
       <input
@@ -16,10 +16,10 @@
         class="todo-input"
         placeholder="Enter a task..."
       />
-      <button id="add-btn" class="add-btn">Add Task</button>
-      <ul id="todo-list" class="todo-list"></ul>
-      <div id="pagination" class="pagination"></div>
+      <span id="add-btn" class="add-btn">Add</span>
     </div>
+
+    <ul id="tasks"></ul>
     <script src="scripts/app.js"></script>
   </body>
 </html>

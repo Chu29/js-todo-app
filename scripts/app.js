@@ -1,13 +1,23 @@
 'use strict'
-
+let lists = document.getElementsByTagName('LI')
 const addBtn = document.getElementById('add-btn')
-const todoInput = document.getElementById('todo-input')
-const todoList = document.getElementById('todo-list')
-const pagination = document.getElementById('pagination')
+const listItem = document.querySelector('ul')
 
-const todos = [] // stores the tasks
-const itemsPerPage = 5
-let currentPage = 1
+// create a close button and append to each list item
+for (let i = 0; i < lists.length; i++) {
+  const span = document.createElement('span')
+  const closeBtn = document.createTextNode('\u00D7')
+  span.className = 'close'
+  span.appendChild(closeBtn)
+  lists[i].appendChild(span)
+
+  // Create and append the Edit Button
+  const editSpan = document.createElement('span')
+  const editBtn = document.createTextNode('\u270F')
+  editSpan.className = 'edit'
+  editSpan.appendChild(editBtn)
+  lists[i].appendChild(editSpan)
+}
 
 const showErrorMessage = (message) => {
   const errorMessage = document.querySelector('.error-message')
@@ -18,100 +28,47 @@ const showErrorMessage = (message) => {
   }, 3000)
 }
 
-const renderPagination = () => {}
-
-const editTask = (index, li, taskText) => {
-  const input = document.createElement('input')
-  input.type = 'text'
-  input.value = todos[index]
-  input.className = 'todo-text'
-
-  // create save btn
-  const saveBtn = document.createElement('button')
-  const deleteBtn = document.createElement('button')
-  saveBtn.className = 'save-btn'
-  saveBtn.textContent = 'save'
-  deleteBtn.className = 'delete-btn'
-  deleteBtn.textContent = 'delete'
-
-  // replace the task text and edit with the current input
-
-  li.innerHTML = ''
-  li.appendChild(input)
-  li.appendChild(saveBtn)
-  li.appendChild(deleteBtn)
-
-  saveBtn.addEventListener('click', () => {
-    const updatedTask = input.value.trim()
-    if (updatedTask !== '') {
-      todos[index] = updatedTask
-      todoRender()
-    } else {
-      showErrorMessage('Task cannot be empty.')
-    }
-  })
-}
-
-const deleteTask = (index) => {
-  if ((currentPage - 1) * itemsPerPage >= todos.length) {
-    currentPage = Math.max(currentPage - 1, 1)
+// click on a close button to hide the current list item
+const close = document.getElementsByClassName('close')
+for (let i = 0; i < close.length; i++) {
+  close[i].onclick = function () {
+    const div = this.parentElement
+    div.style.display = 'none'
   }
-  todos.splice(index, 1)
-  todoRender()
-  renderPagination()
 }
 
-const todoRender = () => {
-  todoList.innerHTML = ''
-
-  // get task for current page
-  const start = (currentPage - 1) * itemsPerPage
-  const end = start + itemsPerPage
-  const currentTodos = todos.slice(start, end)
-
-  // render tasks
-  currentTodos.forEach((task, index) => {
-    const li = document.createElement('li')
-    li.className = 'todo-item'
-
-    // task content
-    const taskText = document.createElement('span')
-    taskText.className = 'todo-text'
-    taskText.textContent = task
-
-    // edit btn
-    const editBtn = document.createElement('button')
-    editBtn.className = 'edit-btn'
-    editBtn.textContent = 'Edit'
-    editBtn.addEventListener('click', () => {
-      editTask(start + index, li, taskText)
-    })
-
-    // delete btn
-    const deleteBtn = document.createElement('button')
-    deleteBtn.className = 'delete-btn'
-    deleteBtn.textContent = 'Delete'
-    deleteBtn.addEventListener('click', () => {
-      deleteTask(start + index)
-    })
-
-    li.appendChild(taskText)
-    li.appendChild(editBtn)
-    li.appendChild(deleteBtn)
-    todoList.appendChild(li)
-  })
-}
-
-// event listener
-addBtn.addEventListener('click', () => {
-  const task = todoInput.value.trim()
-  if (task === '') {
-    showErrorMessage('Please enter a task.')
-    return
+// add a 'checked' symbol when clicking on a list item
+listItem.addEventListener('click', (event) => {
+  if (event.target.tagName === 'LI') {
+    event.target.classList.toggle('checked')
   }
-
-  todos.unshift(task) // add task to the todos array
-  todoInput.value = ''
-  currentPage = 1
-  todoRender()
 })
+
+// create new list item onclick 'Add' button
+const newListItem = () => {
+  const li = document.createElement('li')
+  const inputValue = document.getElementById('todo-input').value.trim()
+  const listContent = document.createTextNode(inputValue)
+  li.appendChild(listContent)
+  if (inputValue === '') {
+    showErrorMessage('You must write something!')
+  } else {
+    document.getElementById('tasks').appendChild(li)
+  }
+  document.getElementById('todo-input').value = ''
+
+  const span = document.createElement('SPAN')
+  const text = document.createTextNode('\u00D7')
+  span.className = 'close'
+  span.appendChild(text)
+  li.appendChild(span)
+
+  for (let i = 0; i < close.length; i++) {
+    close[i].onclick = function () {
+      const div = this.parentElement
+      div.remove()
+    }
+  }
+}
+
+addBtn.addEventListener('click', newListItem)
