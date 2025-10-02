@@ -1,5 +1,5 @@
 'use strict'
-let lists = document.getElementsByTagName('LI')
+const lists = document.getElementsByTagName('LI')
 const addBtn = document.getElementById('add-btn')
 const listItem = document.querySelector('ul')
 
