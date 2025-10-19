@@ -11,11 +11,9 @@ const createTodo = () => {
 
   checkbox.type = 'checkbox'
   checkbox.addEventListener('change', function () {
-    if (checkbox.checked) {
-      li.style.textDecoration = 'line-through'
-    } else {
-      li.style.textDecoration = 'none'
-    }
+    checkbox.checked
+      ? (li.style.textDecoration = 'line-through')
+      : (li.style.textDecoration = 'none')
     saveTodos()
   })
 
