@@ -27,6 +27,16 @@ const createTodo = () => {
 
   saveTodos()
 }
+// function to save todos to local storage
+const saveTodos = () => {
+  const todos = []
+  document.querySelectorAll('#todo-list li').forEach((li) => {
+    const todoText = li.childNodes[1].nodeValue
+    const isChecked = li.childNodes[0].checked
+    todos.push({ text: todoText, checked: isChecked })
+  })
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
 
 // loads todos saved in local storage
 document.addEventListener('DOMContentLoaded', loadTodos)
