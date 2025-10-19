@@ -5,106 +5,58 @@
 }
 
 body {
-  max-width: 850px;
-  margin: 4rem auto;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 20px;
 }
 
-h1 {
-  font-size: 1.8rem;
-  color: #f0f8ff;
+h2 {
+  text-align: center;
+}
+
+#todo-container {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#todo-list {
+  list-style-type: none;
+}
+
+#todo-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+#todo-list li input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+#input-area {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-/* style the lists items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
+#new-todo {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-/* Darker background-color on hover */
-ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-  content: "";
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-/* Style the input */
-input {
-  margin: 0;
+#add-btn {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 0;
-  width: 75%;
-  padding: 10px;
-  float: left;
-  font-size: 16px;
-  outline: none;
-}
-
-/* Style the close button */
-.close,
-.edit {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px;
-}
-
-.close:hover {
-  background-color: #e4004b;
-  color: white;
-}
-
-.header {
-  background-color: #37353e;
-  padding: 30px 40px;
-  color: white;
-  text-align: center;
-}
-
-/* Clear floats after the header */
-.header::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.add-btn {
-  padding: 10px;
-  width: 25%;
-  background-color: #5a9690;
-  color: #fff;
-  float: left;
-  text-align: center;
-  font-size: 16px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: 0.3s;
-  border-radius: 0;
 }
-
-.add-btn:hover {
-  background: #2f5755;
+#add-btn:hover {
+  background-color: #0056b3;
 }

@@ -4,22 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/index.css" />
-    <title>TODO:APP</title>
+    <title>js-todo-app</title>
   </head>
   <body>
-    <div id="my-div" class="header">
-      <h1>TODO APP</h1>
-      <div id="error-message" class="error-message"></div>
-      <input
-        type="text"
-        id="todo-input"
-        class="todo-input"
-        placeholder="Enter a task..."
-      />
-      <span id="add-btn" class="add-btn">Add</span>
+    <div id="todo-container">
+      <h2>My To-Do List</h2>
+
+      <div id="input-area">
+        <input type="text" id="new-todo" placeholder="Add a new task..." />
+
+        <button id="add-btn">Add</button>
+      </div>
+
+      <ul id="todo-list"></ul>
     </div>
 
-    <ul id="tasks"></ul>
     <script src="scripts/app.js"></script>
   </body>
 </html>
