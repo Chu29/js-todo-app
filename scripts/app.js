@@ -1,14 +1,14 @@
 'use strict'
 
 const addTodoBtn = document.getElementById('add-btn')
+const li = document.createElement('li')
+const checkbox = document.createElement('input')
 
 // function to create a new todo item
 const createTodo = () => {
   const newTodo = document.getElementById('new-todo').value
   if (newTodo.trim() === '') return
 
-  const li = document.createElement('li')
-  const checkbox = document.createElement('input')
   checkbox.type = 'checkbox'
   checkbox.addEventListener('change', function () {
     if (checkbox.checked) {
