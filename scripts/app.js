@@ -27,6 +27,7 @@ const createTodo = () => {
 
   saveTodos()
 }
+
 // function to save todos to local storage
 const saveTodos = () => {
   const todos = []
@@ -36,6 +37,37 @@ const saveTodos = () => {
     todos.push({ text: todoText, checked: isChecked })
   })
   localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+// function to load todos from local storage
+const loadTodos = () => {
+  // parse todos stored in local storage into a js object
+  const todos = JSON.parse(localStorage.getItem('todos'))
+  if (todos) {
+    todos.forEach((todo) => {
+      const li = document.createElement('li')
+      const checkbox = document.createElement('input')
+      checkbox.type = 'checkbox'
+      checkbox.checked = todo.checked
+      checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          li.style.textDecoration = 'line-through'
+        } else {
+          li.style.textDecoration = 'none'
+        }
+        saveTodos()
+      })
+
+      li.appendChild(checkbox)
+      li.appendChild(document.createTextNode(todo.text))
+
+      document.getElementById('todo-list').appendChild(li)
+
+      if (todo.checked) {
+        li.style.textDecoration = 'line-through'
+      }
+    })
+  }
 }
 
 // loads todos saved in local storage
